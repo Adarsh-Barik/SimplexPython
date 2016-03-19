@@ -1,0 +1,38 @@
+# comments start with # no inline comments
+# numbers can be integer (1, 2, -3), fractions (1/2, -2/4, 3/5) or decimals (1.2, 2.3, 0.32)
+# note decimal as .123 are not allowed so don't be lazy and write them as 0.123
+
+# objective function, you can use min, minimize, min. or max, maximize, max. (case insensitive)
+# Lets say that xij is number of product i manufactured at center j
+# i = 1 (large), 2(medium), 3(small)
+# j = 1 (center 1), 2 (center 2), 3 (center 3)
+
+maximize 12 x11 + 12 x12 + 12 x13 + 10 x21 + 10 x22 + 10 x23 + 9 x31 + 9 x32 + 9 x33   
+
+# subject to, such that, sub to (case insensitive)
+
+subject to 
+
+# fraction (scheduled production)/(center's capacity) should be same at all the centers
+1/550 x11 + 1/550 x21 + 1/550 x31 - 1/750 x12 - 1/750 x22 - 1/750 x32 = 0
+1/750 x12 + 1/750 x22 + 1/750 x32 - 1/275 x13 - 1/275 x23 - 1/275 x33 = 0
+
+# centers should not exceed their production capacities
+x11 + x21 + x31 <= 550
+x12 + x22 + x32 <= 750
+x13 + x23 + x33 <= 275
+
+# there is no point producing a product more than its market demand
+x11 + x12 + x13 <= 700
+x21 + x22 + x23 <= 900
+x31 + x32 + x33 <= 340
+
+# each center also has constraint on water availability
+21 x11 + 17 x21 + 9 x31 <= 10000
+21 x12 + 17 x22 + 9 x32 <= 7000 
+21 x13 + 17 x23 + 9 x33 <= 4200
+
+# non-negativity constraints (can be skipped if assume_non_negative_variables is set to True)
+# write 0 not 0. or 0.0000, don't say later that I didn't tell you beforehand
+
+# variables will be obviously non-negative, we will take care of this from config

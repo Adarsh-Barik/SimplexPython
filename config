@@ -1,0 +1,74 @@
+# Configuration file is maintained by bots working for Adarsh
+# Send any query to abarik@purdue.edu
+# Read the comments before making any changes
+# This has been tested on "Debian 4.2.6-1 x86_64 GNU/Linux version 4.2.0-1-amd64" 
+
+
+# This section contains configuration to choose input method 
+# One and only one of these should be true
+
+[DEFAULT_CONFIG]
+use_human_readable_config = True
+use_standard_form_config = False
+
+# if should_print_tableau is True then tableau at each iteration will be printed  
+should_print_tableau = False
+
+
+# Human Readable Configuration 
+# This allows you to enter input in human readable format i.e.
+# You can type objective functions and constraints algebraically as you normally do
+# e.g. 
+# min. x1 + x2
+# subject to x1 + 3x2 <= 5
+# 			 x1 - 2x2 <= 2
+
+# problem_file
+# problem_file is path to file where you have written the problem in human readable format
+
+# assume_non_negative_variable
+# If assume_non_negative_variable is True then you don't have to enter non-negativity constraints 
+# However, if assume_non_negative_variable is False then you MUST enter non-negativity (or negativity) constraints
+# in this case if non-negativity (or negativity) constraint for a variable is missing in problem_file then 
+# it is assumed to be a free variable and treated as such    
+
+[HUMAN_READABLE]
+problem_file = ./problem_human_readable.txt
+assume_non_negative_variable = True
+
+
+# Standard Form Configuration
+# Alternatively, you can also input data in standard form
+# All variables are assumed to be non-negative (as in the definition of standard form)
+
+# coeff_matrix_file
+# coeff_matrix_file contains data for coefficient matrix in standard form i.e. with coefficients of slack variables
+# data should be typed as space delimited numbers
+# e.g.
+# 1 3 1 0
+# 1 -2 0 1
+
+# cost_coeff_file
+# cost_coeff_file contains data for cost coefficients (coefficient in objective function)
+# This should be a row vector
+# data should be typed as space delimited numbers
+# Make sure that this has 0 coefficient for slack variables (column dimension must match with standard coefficient matrix)
+# e.g.
+# 1 1 0 0
+
+# b_file
+# b_file contains data for RHS of constraints 
+# This should be a column vector (row dimension must match with standard coefficient matrix)
+# Make sure all values are non-negative (if they are not then you can multiply corresponding row with -1 and make it positive)
+# e.g.
+# 5
+# 2
+
+# is_min_problem 
+# is_min_problem is True for minimization problem and False otherwise
+
+[STANDARD_FORM]
+coeff_matrix_file = ./coeff_matrix_standard_form.txt
+cost_coeff_file = ./cost_coeff_standard_form.txt
+b_file = ./b_standard_form.txt
+is_min_problem = True
